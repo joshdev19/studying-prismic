@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={clsx(nunito.className, nunitoSans.className)}>{children}</body>
+      <body className={clsx(nunito.variable, nunitoSans.variable)}>{children}</body>
     </html>
   );
 }
