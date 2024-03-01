@@ -1,9 +1,45 @@
-import Image from "next/image";
+import { createClient } from '@/prismicio'
+import { PrismicLink } from '@prismicio/react';
 
-export default function Home() {
-  return (
-    <main>
-      <h1 className="font-display text-red-500"> Hello </h1>
-    </main>
-  );
+export default async function Main () {
+
+    const client = createClient();
+
+    const datas = await client.getSingle('settings');
+
+    console.log(datas.data.og_image.url)
+
+    return (
+        <table className='w-100% border-collapse mx-auto'>
+          <thead>
+            <tr>
+              <th className='border p-5'> Title </th>
+              <th className='border p-5'> Description </th>
+              <th className='border p-5'> OG Image </th>
+              <th className='border p-5'> Navigations </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className='border p-5'> { datas.data.site_title } </td>
+              <td className='border p-5'> { datas.data.meta_description } </td>
+              <td className='border p-5'> { datas.data.og_image.url } </td>
+              <td className='border p-5'>
+                <ul>
+                  {
+                    datas.data.navigation.map( (n, i) => {
+                      return (
+                        <li key={i}>
+                          <PrismicLink field={n?.link}> { n?.label } </PrismicLink>
+                        </li>
+                      ) 
+                    })
+                  }
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    )
+
 }
