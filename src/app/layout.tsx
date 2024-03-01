@@ -3,6 +3,7 @@ import { Nunito, Nunito_Sans } from "next/font/google";
 import clsx from "clsx";
 import "./globals.css";
 import { createClient } from "@/prismicio"; 
+import Header from "@/components/Header";
 
 type Props = {
   params: { id: string };
@@ -43,7 +44,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(nunito.variable, nunitoSans.variable)}>
-        <header></header>
         {children}
       </body>
     </html>
